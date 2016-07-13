@@ -1,0 +1,94 @@
+{
+  "name": "public-opinion-mining-client",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=6"
+  },
+  "description": "The client side of yoctol public-opinion-mining project",
+  "main": "run.js",
+  "scripts": {
+    "test-only": "NODE_ENV=test mocha $npm_package_options_mocha",
+    "test:watch": "npm run test-only -- --watch",
+    "lint": "eslint .",
+    "coverage": "nyc --check-coverage --lines 80 --functions 80 npm run test-only",
+    "test": "npm run lint && npm run coverage",
+    "build:prod": "rm -rf server/public && NODE_ENV=production webpack --config webpack.config.prod.js",
+    "start:dev": "NODE_ENV=development node run.js",
+    "start": "npm run build:prod && NODE_ENV=production node run.js"
+  },
+  "options": {
+    "mocha": "--compilers js:babel-register --require ./scripts/test_setup.js src/**/__tests__/**/*.spec.js --colors"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-__coverage__": "^11.0.0",
+    "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-transform-remove-console": "^6.8.0",
+    "babel-plugin-transform-remove-debugger": "^6.8.0",
+    "babel-plugin-webpack-loaders": "^0.5.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
+    "chai-enzyme": "^0.5.0",
+    "css-loader": "^0.23.1",
+    "enzyme": "^2.3.0",
+    "eslint": "^2.13.1",
+    "eslint-config-yoctol": "^0.6.2",
+    "eslint-plugin-import": "^1.9.2",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "fetch-mock": "^4.6.0",
+    "http-client-debug": "^0.1.2",
+    "ignore-styles": "^4.0.0",
+    "jsdom": "^9.3.0",
+    "mocha": "^2.5.3",
+    "nyc": "^6.6.1",
+    "redux-logger": "^2.6.1",
+    "require-uncached": "^1.0.2",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.11.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "http-client": "^4.1.0",
+    "invariant": "^2.2.1",
+    "json-loader": "^0.5.4",
+    "morgan": "^1.7.0",
+    "postcss-loader": "^0.9.1",
+    "proxy-middleware": "^0.15.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.1",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.5.2",
+    "redux-saga": "^0.10.5"
+  },
+  "nyc": {
+    "exclude": [
+      "src/**/__tests__/**/*.spec.js",
+      "scripts/"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  }
+}
